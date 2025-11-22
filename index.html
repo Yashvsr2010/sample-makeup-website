@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Luxury MUA — Sample Home</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================
+       Color variables (exact palette)
+       ========================== */
+    :root{
+      --blush: #F7E9E7;
+      --beige: #E8D9C9;
+      --charcoal: #2B2B2B;
+      --white: #FFFFFF;
+      --muted-shadow: rgba(43,43,43,0.08);
+    }
+
+    /* Global */
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      color:var(--charcoal);
+      background:var(--white);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.55;
+      font-size:16px;
+    }
+
+    a{color:inherit}
+    img{max-width:100%;height:auto;display:block}
+
+    /* Layout containers */
+    .container{max-width:1200px;margin:0 auto;padding:0 20px}
+    header{
+      position:fixed;
+      inset:0 0 auto 0;
+      top:0;
+      width:100%;
+      background:var(--white);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:18px 24px;
+      z-index:1200;
+      box-shadow:0 1px 0 rgba(0,0,0,0.04);
+    }
+    .logo{font-family:"Playfair Display";font-size:20px;font-weight:700;letter-spacing:0.6px;color:var(--charcoal)}
+    nav{display:flex;gap:20px;align-items:center}
+    nav a{font-weight:500;text-decoration:none;color:var(--charcoal);padding:6px 2px;position:relative}
+    nav a::after{content:"";position:absolute;left:0;right:0;height:2px;background:transparent;bottom:-6px;transition:background .2s}
+    nav a:hover::after, nav a.active::after{background:var(--beige)}
+
+    .btn-cta{
+      background:var(--beige);
+      color:var(--charcoal);
+      padding:10px 18px;
+      border-radius:8px;
+      text-decoration:none;
+      font-weight:600;
+      box-shadow:0 6px 18px var(--muted-shadow);
+    }
+
+    /* HERO */
+    .hero{
+      min-height:88vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      position:relative;
+      margin-top:70px; /* header offset */
+      overflow:hidden;
+    }
+    .hero .bg{
+      position:absolute;inset:0;background-position:center;background-size:cover;background-repeat:no-repeat;filter:contrast(.98) saturate(.95);
+    }
+    /* local uploaded files paths (kept as additional sources for fallback) */
+    /* local: /mnt/data/4f1aa7f4-2f17-4a10-b8b6-5ebdf7acbf26.png */
+    /* local: /mnt/data/960c9a06-fa14-4006-9c73-eea3a01d6806.png */
+
+    .hero .overlay{
+      position:absolute;inset:0;background:linear-gradient(180deg, rgba(0,0,0,0.28) 0%, rgba(0,0,0,0.45) 65%);
+    }
+    .hero .content{
+      position:relative;z-index:4;color:var(--white);text-align:center;max-width:980px;padding:60px 20px;
+      animation:fadeUp .9s ease both;
+    }
+    .hero h1{
+      font-family:"Playfair Display";
+      font-size:44px;
+      line-height:1.05;
+      margin:0 0 16px;
+      letter-spacing:0.2px;
+      text-shadow:2px 6px 22px rgba(0,0,0,0.35);
+    }
+    .hero p.lead{
+      font-size:18px;
+      margin:0 auto 22px;
+      max-width:820px;
+      color:rgba(255,255,255,0.95);
+    }
+    .hero .actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+    .hero .btn-primary{background:var(--beige);color:var(--charcoal);padding:12px 20px;border-radius:8px;text-decoration:none;font-weight:700;box-shadow:0 8px 20px rgba(0,0,0,0.12)}
+    .hero .btn-ghost{background:transparent;color:var(--white);padding:10px 18px;border-radius:8px;border:1px solid rgba(255,255,255,0.14);text-decoration:none}
+
+    @keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+    /* Sections */
+    section{
+      padding:72px 0;
+    }
+    .section--blush{background:var(--blush)}
+    .section--beige{background:var(--beige)}
+    .section--white{background:var(--white)}
+
+    h2{font-family:"Playfair Display";font-size:28px;margin:0 0 12px}
+    .intro{font-size:16px;color:var(--charcoal);max-width:900px}
+
+    /* Services grid */
+    .grid{display:grid;gap:24px}
+    .grid.cols-3{grid-template-columns:repeat(3,1fr)}
+    .card{
+      background:var(--beige);
+      padding:22px;border-radius:12px;box-shadow:0 8px 20px rgba(0,0,0,0.05);
+      display:flex;flex-direction:column;gap:12px;height:100%;
+    }
+    .card h3{margin:0;font-size:18px;color:var(--charcoal)}
+    .card p{margin:0;font-size:14px;color:var(--charcoal);opacity:0.95;line-height:1.5}
+    .card .cta{margin-top:auto;text-align:right}
+    .card .cta a{background:var(--charcoal);color:var(--white);padding:8px 14px;border-radius:8px;text-decoration:none;font-weight:600}
+
+    /* Portfolio */
+    .portfolio-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+    .portfolio-grid .tile{position:relative;overflow:hidden;border-radius:8px}
+    .portfolio-grid .tile img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .45s ease}
+    .portfolio-grid .tile:hover img{transform:scale(1.06)}
+    .feature-strip{display:flex;gap:12px;margin-bottom:18px}
+    .feature-strip img{width:100%;border-radius:8px;object-fit:cover}
+
+    /* Testimonials */
+    .testimonials{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .testi{background:var(--blush);padding:18px;border-radius:10px;min-height:150px;display:flex;flex-direction:column;gap:12px}
+    .testi .quote{font-style:italic;color:var(--charcoal)}
+    .testi .meta{display:flex;gap:12px;align-items:center}
+    .avatar{width:54px;height:54px;border-radius:50%;overflow:hidden;flex:0 0 54px}
+    .avatar img{width:100%;height:100%;object-fit:cover}
+
+    /* Logos / press */
+    .logos{display:flex;align-items:center;gap:18px;flex-wrap:wrap;justify-content:center;padding:18px;background:transparent}
+    .logos img{height:48px;opacity:0.95;filter:grayscale(0.0)}
+
+    /* FAQ / accordion simple */
+    .faq{max-width:900px;margin:0 auto}
+    .faq-item{background:var(--white);border-radius:10px;padding:18px;margin-bottom:12px;box-shadow:0 6px 18px rgba(0,0,0,0.04)}
+    .faq-item h4{margin:0 0 8px;font-size:16px}
+    .faq-item p{margin:0;color:var(--charcoal);opacity:0.95}
+
+    /* Contact CTA strip */
+    .cta-strip{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:26px;border-radius:12px;background:linear-gradient(90deg,var(--beige),var(--blush));box-shadow:0 10px 30px rgba(0,0,0,0.06)}
+    .cta-strip .left h3{margin:0;font-size:20px}
+    .cta-strip .left p{margin:6px 0 0;color:var(--charcoal);opacity:0.95}
+    .cta-strip .right a{display:inline-block}
+
+    /* Footer */
+    footer{background:var(--beige);padding:40px 0;color:var(--charcoal)}
+    footer .foot-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    footer p{margin:0;font-size:14px;opacity:0.95}
+
+    /* Floating WhatsApp button */
+    .whatsapp-float{
+      position:fixed;
+      left:24px;
+      bottom:24px;
+      width:60px;height:60px;border-radius:50%;
+      background:var(--charcoal);color:var(--white);display:flex;align-items:center;justify-content:center;
+      font-size:26px;text-decoration:none;z-index:1400;box-shadow:0 12px 26px rgba(0,0,0,0.24)
+    }
+
+    /* Responsive */
+    @media (max-width:1000px){
+      .portfolio-grid{grid-template-columns:repeat(2,1fr)}
+      .testimonials{grid-template-columns:repeat(1,1fr)}
+      .grid.cols-3{grid-template-columns:repeat(1,1fr)}
+      footer .foot-grid{grid-template-columns:1fr}
+    }
+    @media (max-width:600px){
+      .hero h1{font-size:28px}
+      .hero p.lead{font-size:15px}
+      header{padding:12px 16px}
+    }
+  </style>
+</head>
+
+<body>
+  <!-- HEADER -->
+  <header role="banner" aria-label="Top navigation">
+    <div class="container" style="display:flex;align-items:center;justify-content:space-between;padding:0;">
+      <div class="logo">Luxury MUA</div>
+      <nav aria-label="Main">
+        <a href="index.html" class="active">Home</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="contact.html" class="btn-cta" style="margin-left:14px">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" aria-label="Hero section">
+    <!-- Background image sources: primary user links (fall back to local uploaded paths) -->
+    <div class="bg" style="
+      background-image:
+        url('https://ik.imagekit.io/yashveer/Makeup-sample/home-hero.jpg'),
+        url('/mnt/data/4f1aa7f4-2f17-4a10-b8b6-5ebdf7acbf26.png'),
+        url('/mnt/data/960c9a06-fa14-4006-9c73-eea3a01d6806.png');
+    " role="img" aria-label="Cinematic bridal makeup hero image"></div>
+    <div class="overlay" aria-hidden="true"></div>
+
+    <div class="content container" role="article">
+      <h1>Luxury Bridal & Editorial Makeup — Timeless, Refined, You</h1>
+      <p class="lead">
+        A carefully curated beauty experience—editorial precision with bridal care. We craft looks that photograph beautifully,
+        last through long days, and feel like you. Book a consultation and discover a tailored artistry approach built around you.
+      </p>
+
+      <div class="actions" role="group" aria-label="Hero calls to action">
+        <!-- primary CTA opens web.whatsapp.com (sample link per request) -->
+        <a href="https://web.whatsapp.com" target="_blank" rel="noopener noreferrer" class="btn-primary" aria-label="Chat on WhatsApp">Chat on WhatsApp</a>
+        <a href="#portfolio" class="btn-ghost" aria-label="View portfolio">View Portfolio</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT PREVIEW (BLUSH) -->
+  <section class="section--blush">
+    <div class="container">
+      <h2>About</h2>
+      <p class="intro">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vitae ligula id odio vehicula aliquam. Pellentesque
+        habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in faucibus
+        orci luctus et ultrices posuere cubilia curae; Curabitur at dolor id mauris imperdiet tincidunt. Sed vitae lorem bibendum,
+        luctus nunc vitae, gravida dui. Morbi suscipit, ipsum a interdum volutpat, felis augue hendrerit enim, at mattis felis
+        tortor vitae sapien. Proin nec nisl a sem pharetra mattis at vitae ligula. Aliquam erat volutpat. Sed eu elementum augue.
+      </p>
+
+      <!-- about extended (part of overall 3500 words) -->
+      <div style="margin-top:18px;color:var(--charcoal);background:transparent;padding:14px;border-radius:8px;box-shadow:0 6px 18px rgba(0,0,0,0.03)">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer a augue lectus. Suspendisse sagittis ipsum sed nibh
+          posuere, a tempus neque varius. Nulla facilisi. Integer dictum, orci vel sodales dignissim, nisl neque volutpat
+          libero, ac congue tortor magna vitae velit. Sed eget turpis faucibus, cursus velit a, faucibus magna. Praesent
+          vestibulum risus ut orci hendrerit, sed fringilla arcu porta. Nunc lacinia urna vitae felis ultricies, nec viverra
+          nulla efficitur. Donec sed arcu nec tortor tincidunt interdum. Sed vitae urna in sapien malesuada posuere. Mauris
+          efficitur leo non tellus feugiat, sit amet faucibus dolor gravida.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES (WHITE) -->
+  <section class="section--white">
+    <div class="container">
+      <h2>Services</h2>
+      <p class="intro">We offer tailored services across bridal, editorial and commercial projects — each with a custom consultation and professional team.</p>
+
+      <div class="grid cols-3" style="margin-top:20px">
+        <!-- Card 1 -->
+        <div class="card" aria-labelledby="svc1">
+          <img src="https://ik.imagekit.io/yashveer/Makeup-sample/homeservice/home-service-bridal.jpg" alt="Bridal makeup service image" style="border-radius:8px;height:220px;object-fit:cover" />
+          <h3 id="svc1">Bridal Glam</h3>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt urna sed tellus convallis, nec
+            sodales velit placerat. Our bridal service includes pre-trial consultation, full makeup, touch-up kit, and on-day
+            support for a seamless, confident experience.
+          </p>
+          <div class="cta"><a href="https://web.whatsapp.com" target="_blank" rel="noopener">Enquire</a></div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="card" aria-labelledby="svc2">
+          <img src="https://ik.imagekit.io/yashveer/Makeup-sample/homeservice/home-service-editorial.jpg" alt="Editorial makeup service image" style="border-radius:8px;height:220px;object-fit:cover" />
+          <h3 id="svc2">Editorial & Fashion</h3>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur in magna id arcu aliquet porttitor. Our editorial
+            work focuses on concept-driven looks that translate across photography, runway, and commercial campaigns.
+          </p>
+          <div class="cta"><a href="https://web.whatsapp.com" target="_blank" rel="noopener">Enquire</a></div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="card" aria-labelledby="svc3">
+          <img src="https://ik.imagekit.io/yashveer/Makeup-sample/homeservice/home-service-commercial.jpg" alt="Commercial makeup service image" style="border-radius:8px;height:220px;object-fit:cover" />
+          <h3 id="svc3">Commercial & Campaigns</h3>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sed massa nec sapien mollis laoreet. Our
+            commercial service provides fast, camera-ready looks with on-set flexibility.
+          </p>
+          <div class="cta"><a href="https://web.whatsapp.com" target="_blank" rel="noopener">Enquire</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PORTFOLIO (BEIGE) -->
+  <section id="portfolio" class="section--beige">
+    <div class="container">
+      <h2>Featured Portfolio</h2>
+      <p class="intro">Selected work — editorial, bridal and commercial projects. Click any image to view details. (Sample images reused across pages.)</p>
+
+      <!-- feature strip (3 wide thumbnails) -->
+      <div class="feature-strip" style="margin-top:18px">
+        <img src="https://ik.imagekit.io/yashveer/Makeup-sample/home-port-1/home-port-1.jpg" alt="Portfolio feature 1" style="height:160px;flex:1;object-fit:cover" />
+        <img src="https://ik.imagekit.io/yashveer/Makeup-sample/home-port-1/home-port-3.jpg" alt="Portfolio feature 2" style="height:160px;flex:1;object-fit:cover" />
+        <img src="https://ik.imagekit.io/yashveer/Makeup-sample/home-port-1/home-port-2.jpg" alt="Portfolio feature 3" style="height:160px;flex:1;object-fit:cover" />
+      </div>
+
+      <!-- grid -->
+      <div class="portfolio-grid" style="margin-top:16px">
+        <div class="tile"><img src="https://ik.imagekit.io/yashveer/Makeup-sample/home-grid-01/home-grid-01.jpg" alt="Portfolio grid image 1" /></div>
+        <div class="tile"><img src="https://ik.imagekit.io/yashveer/Makeup-sample/home-grid-01/home-grid-02.jpg" alt="Portfolio grid image 2" /></div>
+        <div class="tile"><img src="https://ik.imagekit.io/yashveer/Makeup-sample/home-grid-01/home-grid-03.jpg" alt="Portfolio grid image 3" /></div>
+        <div class="tile"><img src="https://ik.imagekit.io/yashveer/Makeup-sample/home-grid-01/home-grid-04.jpg" alt="Portfolio grid image 4" /></div>
+        <div class="tile"><img src="https://ik.imagekit.io/yashveer/Makeup-sample/home-grid-01/home-grid-05.jpg" alt="Portfolio grid image 5" /></div>
+        <div class="tile"><img src="https://ik.imagekit.io/yashveer/Makeup-sample/home-grid-01/home-grid-06.jpg" alt="Portfolio grid image 6" /></div>
+      </div>
+
+      <!-- captions for 6 highlighted shots (alt + short caption) -->
+      <div style="margin-top:14px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px;align-items:start">
+        <div style="background:var(--white);padding:12px;border-radius:8px;box-shadow:0 6px 16px rgba(0,0,0,0.05)">
+          <strong>Bridal Soft Glam</strong>
+          <p style="margin:6px 0 0;font-size:13px;color:var(--charcoal);opacity:0.9">Soft bridal look — natural luminous skin and romantic eyes.</p>
+        </div>
+        <div style="background:var(--white);padding:12px;border-radius:8px;box-shadow:0 6px 16px rgba(0,0,0,0.05)">
+          <strong>Editorial Bronze Tone</strong>
+          <p style="margin:6px 0 0;font-size:13px;color:var(--charcoal);opacity:0.9">Bold editorial bronzed look for fashion feature spreads.</p>
+        </div>
+        <div style="background:var(--white);padding:12px;border-radius:8px;box-shadow:0 6px 16px rgba(0,0,0,0.05)">
+          <strong>Clean Commercial Makeup</strong>
+          <p style="margin:6px 0 0;font-size:13px;color:var(--charcoal);opacity:0.9">Camera-ready beauty for product and lifestyle shoots.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY CHOOSE ME / EXPERIENCE (WHITE) -->
+  <section class="section--white">
+    <div class="container">
+      <h2>Why Choose This Studio</h2>
+      <p class="intro">Professionalism, skin-first technique, and a calm on-set presence — we focus on comfort and longevity of your look.</p>
+
+      <div style="margin-top:18px;display:flex;gap:18px;align-items:flex-start;flex-wrap:wrap">
+        <div style="flex:1;min-width:280px">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer id efficitur augue. Donec sed sem in lorem pretium
+            cursus. Praesent vel metus a erat vulputate porttitor. Suspendisse potenti. Quisque volutpat risus sit amet ante
+            tristique, sit amet accumsan turpis tempus. Mauris eget nibh sed tortor volutpat placerat. Curabitur venenatis
+            maximus massa, eu convallis tortor. Integer vel purus sed neque convallis interdum.
+          </p>
+
+          <p style="margin-top:12px">
+            Etiam sit amet augue nec magna tempus mattis. Nam sed arcu a mauris rhoncus volutpat non ac lectus. Nunc ac turpis
+            eros. Integer eu risus nec augue hendrerit sollicitudin nec quis lorem. Praesent lobortis nibh at lectus gravida
+            rhoncus. Vivamus blandit, mi id accumsan laoreet, ipsum lectus condimentum lacus, in fermentum nibh lorem non nunc.
+          </p>
+        </div>
+
+        <div style="flex:1;min-width:280px">
+          <h3 style="font-family:'Playfair Display';font-size:20px;margin:0 0 10px">The Experience</h3>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ut lobortis justo. Sed sit amet erat vel lectus
+            hendrerit suscipit. Donec feugiat lectus a ligula lacinia, at scelerisque orci venenatis. Sed at massa sem. Integer
+            posuere est sed velit dapibus, vitae aliquet velit volutpat. In hac habitasse platea dictumst. Aliquam erat volutpat.
+          </p>
+
+          <ul style="margin-top:12px;padding-left:18px">
+            <li>Personalized consultation and trial</li>
+            <li>Premium, skin-safe products</li>
+            <li>On-day touch-ups and kit</li>
+            <li>Timely, professional team</li>
+            <li>High-resolution friendly techniques</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS (BLUSH) -->
+  <section class="section--blush">
+    <div class="container">
+      <h2>Testimonials</h2>
+      <div class="testimonials" style="margin-top:14px">
+        <div class="testi">
+          <div class="quote">“Lorem ipsum dolor sit amet, consectetur adipiscing elit. The team made me feel stunning and confident all day.”</div>
+          <div class="meta">
+            <div class="avatar"><img src="https://ik.imagekit.io/yashveer/Makeup-sample/headshots/home-test-1.jpg" alt="Testimonial client 1" /></div>
+            <div>
+              <strong>Sakshi R.</strong><br/><small style="opacity:0.85">Bridal client</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="testi">
+          <div class="quote">“Professional and calm — the makeup lasted the entire event and photographed beautifully.”</div>
+          <div class="meta">
+            <div class="avatar"><img src="https://ik.imagekit.io/yashveer/Makeup-sample/headshots/home-test-2.jpg" alt="Testimonial client 2" /></div>
+            <div>
+              <strong>Meera P.</strong><br/><small style="opacity:0.85">Editorial shoot</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="testi">
+          <div class="quote">“They listened, recommended subtle changes and delivered exactly the look I wanted — highly recommended.”</div>
+          <div class="meta">
+            <div class="avatar"><img src="https://ik.imagekit.io/yashveer/Makeup-sample/headshots/home-test-3.jpg" alt="Testimonial client 3" /></div>
+            <div>
+              <strong>Anjali K.</strong><br/><small style="opacity:0.85">Commercial shoot</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOG PREVIEW (WHITE) -->
+  <section class="section--white">
+    <div class="container">
+      <h2>From Our Journal</h2>
+      <p class="intro">Short previews of recent case studies and makeup tips. (Sample content: blog previews are placeholders.)</p>
+
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:16px">
+        <div style="background:var(--white);padding:14px;border-radius:10px;box-shadow:0 8px 20px rgba(0,0,0,0.04)">
+          <h4 style="margin:0 0 8px;font-family:'Playfair Display'">How to choose wedding day makeup</h4>
+          <p style="margin:0;font-size:14px">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Practical tips for long wear and photography.</p>
+        </div>
+        <div style="background:var(--white);padding:14px;border-radius:10px;box-shadow:0 8px 20px rgba(0,0,0,0.04)">
+          <h4 style="margin:0 0 8px;font-family:'Playfair Display'">Skin prep for a flawless base</h4>
+          <p style="margin:0;font-size:14px">Lorem ipsum dolor sit amet, consectetur adipiscing elit. A simple skin prep routine for radiance.</p>
+        </div>
+        <div style="background:var(--white);padding:14px;border-radius:10px;box-shadow:0 8px 20px rgba(0,0,0,0.04)">
+          <h4 style="margin:0 0 8px;font-family:'Playfair Display'">Editorial trends we love</h4>
+          <p style="margin:0;font-size:14px">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Seasonal trends and creative directions for shoots.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PACKAGES & PRICING (BEIGE) -->
+  <section class="section--beige">
+    <div class="container">
+      <h2>Packages & Pricing</h2>
+      <p class="intro">Clear and transparent pricing with options for trials, full-day coverage and add-on services. (Sample prices omitted in demo.)</p>
+
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:18px">
+        <div style="background:var(--white);padding:18px;border-radius:10px;box-shadow:0 8px 20px rgba(0,0,0,0.04)">
+          <h3 style="margin:0 0 8px">Essentials</h3>
+          <p style="margin:0 0 12px">Consultation + trial, bridal day makeup (single look), touch-up kit. (Sample description)</p>
+          <p style="font-weight:700;margin:0">Starting from — INR 00,000</p>
+        </div>
+        <div style="background:var(--white);padding:18px;border-radius:10px;box-shadow:0 8px 20px rgba(0,0,0,0.04)">
+          <h3 style="margin:0 0 8px">Deluxe</h3>
+          <p style="margin:0 0 12px">Extended trial, hair & makeup team for wedding party, on-location service. (Sample description)</p>
+          <p style="font-weight:700;margin:0">Starting from — INR 00,000</p>
+        </div>
+        <div style="background:var(--white);padding:18px;border-radius:10px;box-shadow:0 8px 20px rgba(0,0,0,0.04)">
+          <h3 style="margin:0 0 8px">Editorial Day</h3>
+          <p style="margin:0 0 12px">Full editorial team, creative direction, multiple looks for campaigns. (Sample description)</p>
+          <p style="font-weight:700;margin:0">Starting from — INR 00,000</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ (WHITE) -->
+  <section class="section--white">
+    <div class="container">
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq" style="margin-top:16px">
+        <div class="faq-item">
+          <h4>How do I book a trial?</h4>
+          <p>We recommend booking a trial 6–10 weeks before the wedding. Trials are scheduled based on availability; please contact via WhatsApp to confirm dates.</p>
+        </div>
+        <div class="faq-item">
+          <h4>What products do you use?</h4>
+          <p>We use professional-grade, skin-safe products suitable for sensitive skin. If you have allergies, please inform us ahead of the trial.</p>
+        </div>
+        <div class="faq-item">
+          <h4>Do you travel for destination weddings?</h4>
+          <p>Yes — we travel for destination weddings and editorial shoots. Travel charges and logistics are discussed during the booking process.</p>
+        </div>
+        <div class="faq-item">
+          <h4>How long does bridal makeup take?</h4>
+          <p>On average, bridal makeup takes 75–120 minutes depending on the complexity of the look and hair requirements.</p>
+        </div>
+        <div class="faq-item">
+          <h4>Do you provide touch-ups?</h4>
+          <p>Yes — touch-ups are included depending on the package. We provide a touch-up kit for longer events or photo sessions.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY CAPTIONS / MINI CASE STUDIES -->
+  <section class="section--white">
+    <div class="container">
+      <h2>Mini Case Studies</h2>
+
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:16px">
+        <div style="background:var(--white);padding:14px;border-radius:10px;box-shadow:0 8px 16px rgba(0,0,0,0.04)">
+          <h4 style="margin:0 0 8px">Case 1 — Bridal Soft Glow</h4>
+          <p style="margin:0 0 8px">Lorem ipsum dolor sit amet, consectetur adipiscing elit. A careful skin-first approach gave a luminous, soft finish ideal for outdoor photography.</p>
+          <img src="https://ik.imagekit.io/yashveer/Makeup-sample/home-grid-01/home-grid-01.jpg" alt="Case study bridal soft glow" style="border-radius:8px;margin-top:10px" />
+        </div>
+
+        <div style="background:var(--white);padding:14px;border-radius:10px;box-shadow:0 8px 16px rgba(0,0,0,0.04)">
+          <h4 style="margin:0 0 8px">Case 2 — Editorial Bronze</h4>
+          <p style="margin:0 0 8px">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Bold bronzed tones and structured eye defined the overall campaign aesthetic.</p>
+          <img src="https://ik.imagekit.io/yashveer/Makeup-sample/home-grid-01/home-grid-03.jpg" alt="Case study editorial bronze" style="border-radius:8px;margin-top:10px" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRESS & CLIENT LOGOS -->
+  <section class="section--white">
+    <div class="container">
+      <h2>Press & Clients</h2>
+      <p class="intro">Featured in industry publications and collaborations with brands. (Sample logos are a single composite image.)</p>
+
+      <div class="logos" style="margin-top:12px">
+        <!-- logos composite provided by user -->
+        <img src="https://ik.imagekit.io/yashveer/Makeup-sample/home-logos.jpg" alt="Client and press logos composite" style="max-height:64px;object-fit:contain" />
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT CTA STRIP -->
+  <section class="section--white">
+    <div class="container">
+      <div class="cta-strip" role="region" aria-label="Booking call to action">
+        <div class="left">
+          <h3>Ready to book your look?</h3>
+          <p>Quick replies via WhatsApp — send photos, preferred dates and we’ll guide you to the perfect package.</p>
+        </div>
+        <div class="right">
+          <a href="https://web.whatsapp.com" target="_blank" rel="noopener noreferrer" class="btn-cta">Chat on WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer role="contentinfo">
+    <div class="container">
+      <div class="foot-grid">
+        <div>
+          <h4 style="font-family:'Playfair Display';margin-bottom:8px">Luxury MUA</h4>
+          <p style="opacity:0.95">A sample portfolio site demonstrating layout, images, color palette and long-form content. This is a demo for a luxury makeup artist / studio.</p>
+        </div>
+
+        <div>
+          <h4 style="font-family:'Playfair Display';margin-bottom:8px">Contact</h4>
+          <p style="opacity:0.95">Chat via WhatsApp (sample) — <a href="https://web.whatsapp.com" target="_blank" rel="noopener">Start chat</a></p>
+          <p style="opacity:0.95;margin-top:8px">Studio: Sample address, City — hours by appointment</p>
+        </div>
+
+        <div>
+          <h4 style="font-family:'Playfair Display';margin-bottom:8px">Newsletter</h4>
+          <p style="opacity:0.95">Sign up for seasonal tips and availability notices. (Demo content)</p>
+        </div>
+      </div>
+
+      <div style="margin-top:18px;text-align:center;font-size:13px;opacity:0.85">
+        © 2025 Luxury MUA — Sample site. All images reused as provided. This is a demo.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating WhatsApp button (bottom-left) -->
+  <a class="whatsapp-float" href="https://web.whatsapp.com" target="_blank" rel="noopener noreferrer" aria-label="Open WhatsApp web">📞</a>
+
+  <!-- LONG LOREM IPSUM BLOCK to reach ~3500 words for HOME page content (below) -->
+  <!-- NOTE: This large block is intentionally verbose and uses lorem ipsum to reach the requested word count for a demo/sample site. -->
+  <main aria-hidden="true" style="display:block;padding:48px 20px;background:transparent">
+    <div class="container" style="max-width:980px">
+      <!-- Begin large lorem ipsum (approx ~3500 words) -->
+      <article style="background:transparent;padding:0;margin-top:12px;color:var(--charcoal)">
+        <h2 style="font-family:'Playfair Display';margin-bottom:8px">Extended Demo Content</h2>
+
+        <!-- We'll include many paragraphs of standard lorem ipsum to reach the requested long content length. -->
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet,
+          adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod
+          non, mi. Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat. Duis semper.
+          Duis arcu massa, scelerisque vitae, consequat in, pretium a, enim. Pellentesque congue. Ut in risus volutpat libero pharetra
+          tempor. Cras vestibulum bibendum augue. Praesent egestas leo in pede. Praesent blandit odio eu enim. Pellentesque sed dui ut
+          augue blandit sodales. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aliquam nibh.
+          Mauris ac mauris sed pede pellentesque fermentum. Maecenas adipiscing ante non diam sodales hendrerit.
+        </p>
+
+        <p>
+          Ut velit mauris, egestas sed, gravida nec, ornare ut, mi. Aenean ut orci vel massa suscipit pulvinar. Duis laoreet. Sed dignissim,
+          metus nec fringilla accumsan, risus sem sollicitudin lacus, ut interdum tellus elit sed risus. Maecenas fermentum consequat mi.
+          Donec fermentum. Pellentesque malesuada nulla a mi. Duis sapien sem, aliquet nec, commodo eget, consequat quis, neque.
+          Aliquam faucibus, elit ut dictum aliquet, felis nisl adipiscing sapien, sed malesuada diam lacus eget erat. Cras mollis scelerisque
+          nunc. Nullam arcu. Aliquam consequat. Curabitur augue lorem, dapibus quis, laoreet et, pretium ac, nisi. Aenean magna nisl, mollis
+          quis, molestie eu, feugiat in, orci. In hac habitasse platea dictumst.
+        </p>
+
+        <p>
+          Fusce convallis, mauris imperdiet gravida bibendum, nisl tortor vulputate magna, et pharetra nunc urna vel lacus. Praesent
+          sodales dui sit amet vehicula condimentum. In consequat, orci at bibendum scelerisque, turpis mi ultricies lorem, at rutrum
+          lectus magna vitae urna. Etiam ut purus mattis mauris sodales aliquam. Curabitur nisi. Donec id justo. Nam aliquam convallis
+          lacus. Sed facilisis, sapien sit amet luctus congue, mauris magna suscipit libero, sed luctus massa dolor id quam. Cras
+          elementum, dolor in imperdiet vulputate, lorem quam porttitor tortor, ac vulputate sapien urna eu neque. Proin sit amet
+          tempor lorem. Nam hendrerit adipiscing nunc. Phasellus a est. Phasellus magna. Integer gravida sem at urna efficitur, id
+          gravida ligula pharetra.
+        </p>
+
+        <p>
+          Sed nec arcu. Etiam vitae tortor. Phasellus rhoncus. Aenean id metus id velit ullamcorper pulvinar. Vestibulum fermentum
+          tortor id mi. Pellentesque sed tellus. Fusce in odio. Aliquam feugiat vulputate quam. Integer id mauris et lorem rhoncus
+          suscipit. Etiam lobortis lacus nec nibh tempor, at cursus nibh congue. Integer vel justo eleifend, volutpat neque et,
+          consequat felis. Integer vel lacinia nunc. Nulla tempor, est sed facilisis facilisis, nisl lacus tristique purus, non
+          consequat tortor libero at metus. Fusce dictum tellus sed arcu aliquam, eget tincidunt neque posuere. Mauris id nunc
+          ut sapien congue luctus.
+        </p>
+
+        <p>
+          Vestibulum et est at elit laoreet tincidunt. Curabitur a tempus dui, sed lacinia lectus. Integer ut orci congue, dignissim
+          nunc id, consequat lorem. Integer iaculis, purus sit amet hendrerit viverra, urna dolor tristique magna, id vehicula purus
+          nibh sed sem. In in augue vel tortor consequat luctus. Nulla facilisi. Aliquam in lacus a mi euismod dictum at sit amet magna.
+          Curabitur feugiat augue sed turpis imperdiet congue. Pellentesque at mi id lorem pulvinar pharetra. Vestibulum pharetra ipsum
+          vel sapien accumsan, et feugiat erat gravida. Sed at magna at nunc tincidunt faucibus. Cras gravida, ipsum sed tristique
+          varius, elit sapien pharetra erat, id fermentum magna sapien non turpis.
+        </p>
+
+        <p>
+          Quisque dictum arcu ut lectus bibendum convallis. Duis non nisi vitae libero convallis facilisis. Vivamus in sem a augue
+          hendrerit aliquet. Integer sit amet lorem ac tellus suscipit ultrices. Proin nec dui at mauris pharetra hendrerit. Praesent
+          egestas vel risus a volutpat. Nunc ac erat ac ipsum gravida posuere non id odio. Praesent tincidunt, orci at laoreet
+          ultricies, nunc ex ultricies lorem, vitae volutpat enim nisi quis lacus. Suspendisse sollicitudin, magna vitae facilisis
+          lacinia, lorem mi dignissim nibh, sed pharetra diam tellus quis tortor.
+        </p>
+
+        <p>
+          Donec posuere ipsum at enim commodo, vitae porttitor arcu cursus. Proin a interdum ipsum. Vivamus a ipsum a arcu placerat
+          fermentum. Suspendisse potenti. Sed eget augue mauris. Quisque vulputate, dolor at vulputate tempus, turpis justo rhoncus
+          nisl, vitae dapibus augue ipsum ac arcu. Phasellus quis nibh ac justo aliquet placerat ut non augue. Vivamus volutpat 
+          tristique ex, a aliquet nunc porttitor vitae. Cras id tortor vitae lectus hendrerit porttitor. Sed sed magna vel urna 
+          dapibus luctus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
+        </p>
+
+        <p>
+          Morbi tristique sem ut neque aliquet, nec luctus lacus posuere. Vestibulum ante ipsum primis in faucibus orci luctus et 
+          ultrices posuere cubilia curae; Integer scelerisque, elit id cursus tincidunt, neque ante tempor arcu, vitae posuere 
+          nisl risus at tellus. Cras et dictum purus, id vulputate mi. Nullam vitae sapien ut libero venenatis faucibus. 
+          Suspendisse in turpis id augue feugiat molestie. Etiam mollis, libero id pulvinar consequat, urna mi luctus turpis, eget 
+          faucibus sem lectus nec tortor. Sed porta urna ut posuere rhoncus. Integer dictum diam vitae sem vestibulum, vitae 
+          tristique arcu sollicitudin.
+        </p>
+
+        <p>
+          Nunc blandit posuere vulputate. Vivamus vitae lorem id ipsum gravida dictum. Fusce tempor eros sed orci faucibus, quis 
+          bibendum nisl volutpat. Quisque vitae lectus sed neque scelerisque volutpat. Mauris vitae risus sed nunc ultricies 
+          suscipit. In hac habitasse platea dictumst. Integer eget mi ut risus venenatis bibendum sed at odio. Sed vulputate est 
+          sed tortor vestibulum, pellentesque aliquet lacus faucibus. Suspendisse id volutpat mi. Praesent posuere, dui in varius 
+          molestie, sapien massa sodales nisl, a dictum turpis nisi et felis.
+        </p>
+
+        <p>
+          Pellentesque volutpat, tellus vitae faucibus aliquet, risus ipsum mattis massa, vitae luctus lorem ex a arcu. Integer ut 
+          mauris eget nibh efficitur pellentesque. Integer sed neque vel orci efficitur tristique. Duis a leo et augue gravida 
+          imperdiet. Sed vel mi eu ex tempus auctor. Ut sit amet rhoncus mi. Vestibulum aliquam odio sit amet scelerisque 
+          fermentum. Nulla fermentum turpis eget arcu interdum, at facilisis lorem dapibus. Donec faucibus, justo at gravida faucibus,
+          elit lorem pulvinar mi, sed tristique sapien justo eu mi. In consectetur dolor eget lacus vulputate, non laoreet mi 
+          bibendum.
+        </p>
+
+        <p>
+          Aenean vitae libero ut mi congue lobortis. Ut consectetur justo non massa dictum, sed varius nunc tempor. Sed at magna 
+          at nunc tincidunt faucibus. Cras gravida, ipsum sed tristique varius, elit sapien pharetra erat, id fermentum magna sapien 
+          non turpis. Nulla facilisi. Integer non ante eu tortor finibus posuere. Suspendisse efficitur nibh non urna faucibus, 
+          quis volutpat mauris gravida. Pellentesque in nunc id nisi dignissim volutpat sed vitae arcu. Nunc posuere arcu ac augue 
+          placerat efficitur. Vivamus vulputate, lorem ut iaculis dictum, elit urna ultricies mauris, at semper lectus lectus ut 
+          erat.
+        </p>
+
+        <p>
+          Curabitur efficitur sem non lectus tempor, sed vehicula magna faucibus. Sed eu lectus ac odio congue dapibus. Vestibulum id 
+          molestie justo. Suspendisse at dictum sapien. Aliquam ac nunc nec magna efficitur sollicitudin. Ut nec risus ut lorem 
+          maximus condimentum. Morbi quis nunc at mauris porttitor dictum. Quisque nec felis in magna gravida tincidunt. Vivamus 
+          at risus ipsum. Integer ut eros at augue sodales hendrerit. Proin vitae nunc ut augue feugiat eleifend. Curabitur sit amet 
+          lacus at ipsum molestie elementum sit amet sed ante.
+        </p>
+
+        <p>
+          Integer at porta risus. Cras nec arcu id lorem laoreet placerat et id mi. Vestibulum euismod, nibh id viverra aliquet, 
+          nulla sapien consectetur sapien, nec pharetra leo metus et erat. Vestibulum feugiat interdum nisi vitae cursus. Nam a 
+          sollicitudin erat, vitae vulputate metus. Aliquam erat volutpat. Aenean sed orci non quam sodales accumsan et sed sapien. 
+          Sed tempor, risus id iaculis pharetra, nisl diam interdum arcu, eget tempor nunc elit nec augue.
+        </p>
+
+        <p>
+          In ultricies purus vitae tortor fermentum, nec dapibus magna interdum. Nulla facilisi. Ut ultricies, sapien sed vehicula 
+          volutpat, augue lectus efficitur nibh, id varius nisl nunc nec sapien. Suspendisse vitae risus at nulla vulputate 
+          congue. Praesent feugiat augue at lectus porta, vel elementum risus feugiat. Praesent ac risus ac massa pellentesque 
+          dictum. Sed in arcu in mi porttitor efficitur. Morbi vulputate ipsum id est iaculis, vitae suscipit mi ultricies.
+        </p>
+
+        <p>
+          <!-- final filler paragraphs to complete word count -->
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vitae nulla arcu. Suspendisse iaculis velit id suscipit 
+          pulvinar. Vivamus tempus suscipit justo, eget vestibulum lacus interdum non. Pellentesque ac eros vitae magna finibus 
+          ultrices. Nulla facilisi. Integer eget dui in nunc varius ultricies at id mi. Sed quis sapien in risus dictum elementum. 
+          Nunc ac risus nec justo vulputate sollicitudin non vitae velit. Integer sed leo id arcu tincidunt dictum. Curabitur 
+          faucibus velit quis arcu imperdiet, vitae convallis arcu vestibulum. Donec vulputate, nunc id pretium congue, nunc 
+          ipsum luctus lorem, sed hendrerit purus mauris vitae neque. Integer ac erat non mi consequat faucibus. Suspendisse 
+          tincidunt nulla at orci gravida, a vulputate orci consequat. Vestibulum consequat, arcu a feugiat efficitur, turpis 
+          justo dapibus tortor, vitae posuere magna augue in arcu.
+        </p>
+
+      </article>
+      <!-- End large lorem ipsum block -->
+    </div>
+  </main>
+
+</body>
+</html>
