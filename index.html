@@ -7,6 +7,11 @@
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init();
+</script>
 
   <style>
     /* ==========================
@@ -195,6 +200,21 @@
       .hero p.lead{font-size:15px}
       header{padding:12px 16px}
     }
+
+    html {
+  scroll-behavior: smooth;
+}
+
+
+.whatsapp-float {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  font-size: 32px;
+  z-index: 1000;
+}
+
+    
   </style>
 </head>
 
@@ -731,6 +751,8 @@
       <!-- End large lorem ipsum block -->
     </div>
   </main>
+<a href="https://wa.me/919876543210" class="whatsapp-float" target="_blank">📞</a>
 
 </body>
 </html>
+
